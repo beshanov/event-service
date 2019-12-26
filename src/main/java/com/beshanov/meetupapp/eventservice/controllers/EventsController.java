@@ -1,36 +1,33 @@
 package com.beshanov.meetupapp.eventservice.controllers;
 
 import com.beshanov.meetupapp.eventservice.model.mock.EventMock;
-import com.beshanov.meetupapp.eventservice.model.request.GetEventsByIdsRequest;
-import com.beshanov.meetupapp.eventservice.model.response.EventListResponse;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 @RestController
 public class EventsController {
 
-    @PostMapping("/events")
-    public EventListResponse getEventsByIds(@RequestBody GetEventsByIdsRequest request) {
-        List<Long> eventsId = request.getEventsId();
-        List<EventMock> events = new ArrayList<>();
-        for (Long id : eventsId) {
-            EventMock event = new EventMock();
-            event.setId(id);
-            event.setAuthorId(id);
-            event.setDate(Calendar.getInstance());
-            event.setDescription("description" + id);
-            event.setEventType("type" + id);
-            event.setPlace("place" + id);
-            event.setTitle("title" + id);
-            events.add(event);
-        }
-        EventListResponse response = new EventListResponse();
-        response.setEvents(events);
-        return response;
+    @GetMapping("/events/{eventId}")
+    public EventMock getEventsById(@PathVariable Long eventId) {
+        //returns mock event object
+        EventMock event = new EventMock();
+        event.setId(eventId);
+        event.setAuthorId(eventId);
+        event.setDate(Calendar.getInstance());
+        event.setDescription("description" + eventId);
+        event.setEventType("type" + eventId);
+        event.setPlace("place" + eventId);
+        event.setTitle("title" + eventId);
+        return event;
     }
+
+    @PostMapping("/events")
+    public EventMock createEvent(@RequestBody EventMock event) {
+        //сохраняем event в базу
+        //достаем и возвращаем
+        event.setId(11111L);
+        return event;
+    }
+
 }
