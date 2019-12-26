@@ -1,10 +1,13 @@
-package com.beshanov.meetupapp.eventservice.model.mock;
+package com.beshanov.meetupapp.eventservice.domain;
+
+import org.springframework.data.annotation.Id;
 
 import java.util.Calendar;
 
-public class EventMock {
+public class Event {
 
-    private Long id;
+    @Id
+    private String id;
     private String title;
     private Long authorId;
     private Calendar date;
@@ -14,21 +17,22 @@ public class EventMock {
     private String place;
     private String location;
     private String reference;
-    private String participantsNumber;
-    private String participantsAgeFrom;
-    private String participantsAgeTo;
+    private Integer participantsNumber;
+    private Integer participantsAgeFrom;
+    private Integer participantsAgeTo;
     private String privacyCategory;
 
-    public EventMock() {
+    public Event() {
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
+
 
     public String getLocation() {
         return location;
@@ -46,27 +50,27 @@ public class EventMock {
         this.reference = reference;
     }
 
-    public String getParticipantsNumber() {
+    public Integer getParticipantsNumber() {
         return participantsNumber;
     }
 
-    public void setParticipantsNumber(String participantsNumber) {
+    public void setParticipantsNumber(Integer participantsNumber) {
         this.participantsNumber = participantsNumber;
     }
 
-    public String getParticipantsAgeFrom() {
+    public Integer getParticipantsAgeFrom() {
         return participantsAgeFrom;
     }
 
-    public void setParticipantsAgeFrom(String participantsAgeFrom) {
+    public void setParticipantsAgeFrom(Integer participantsAgeFrom) {
         this.participantsAgeFrom = participantsAgeFrom;
     }
 
-    public String getParticipantsAgeTo() {
+    public Integer getParticipantsAgeTo() {
         return participantsAgeTo;
     }
 
-    public void setParticipantsAgeTo(String participantsAgeTo) {
+    public void setParticipantsAgeTo(Integer participantsAgeTo) {
         this.participantsAgeTo = participantsAgeTo;
     }
 
@@ -134,3 +138,4 @@ public class EventMock {
         this.place = place;
     }
 }
+

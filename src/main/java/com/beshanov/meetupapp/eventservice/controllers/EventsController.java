@@ -1,33 +1,32 @@
 package com.beshanov.meetupapp.eventservice.controllers;
 
-import com.beshanov.meetupapp.eventservice.model.mock.EventMock;
+import com.beshanov.meetupapp.eventservice.domain.Event;
+import com.beshanov.meetupapp.eventservice.repository.EventRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
+import java.util.Optional;
 
 @RestController
 public class EventsController {
 
+    @Autowired
+    EventRepository eventRepository;
+
     @GetMapping("/events/{eventId}")
-    public EventMock getEventsById(@PathVariable Long eventId) {
-        //returns mock event object
-        EventMock event = new EventMock();
-        event.setId(eventId);
-        event.setAuthorId(eventId);
-        event.setDate(Calendar.getInstance());
-        event.setDescription("description" + eventId);
-        event.setEventType("type" + eventId);
-        event.setPlace("place" + eventId);
-        event.setTitle("title" + eventId);
-        return event;
+    public Event getEventsById(@PathVariable String eventId) {
+        Optional<Event> event = eventRepository.findById(eventId);
+        if(event.isPresent()) {
+            return event.get();
+        }
+        System.err.println("there is no event with id " + eventId);
+        return null;
     }
 
     @PostMapping("/events")
-    public EventMock createEvent(@RequestBody EventMock event) {
-        //сохраняем event в базу
-        //достаем и возвращаем
-        event.setId(11111L);
-        return event;
+    public Event createEvent(@RequestBody Event event) {
+        return eventRepository.save(event);
     }
 
 }
