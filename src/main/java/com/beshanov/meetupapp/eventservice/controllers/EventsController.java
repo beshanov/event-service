@@ -5,7 +5,6 @@ import com.beshanov.meetupapp.eventservice.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Calendar;
 import java.util.Optional;
 
 @RestController
@@ -28,5 +27,4 @@ public class EventsController {
     public Event createEvent(@RequestBody Event event) {
         return eventRepository.save(event);
     }
-
 }
